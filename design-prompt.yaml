@@ -1,0 +1,201 @@
+# ============================================================
+# Design Prompt YAML — Apple Store style abstraction
+# 特定サイトのデザイン哲学を抽象化したテンプレート
+# どんなサイトにも流用可能
+# ============================================================
+
+meta:
+  source_reference: "Apple Store (apple.com/jp/store)"
+  style_label: "premium-minimal"
+  mood: "confident, refined, aspirational"
+  target_feel: "高級感・信頼感・余白の美"
+
+
+# ── 1. カラーパレット ──────────────────────────────────────
+color:
+  # 背景レイヤー（ページ全体の空気感を作る）
+  background:
+    primary:   "#000000"   # ヒーロー・強調セクション：深い黒
+    secondary: "#F5F5F7"   # コンテンツセクション：アッシュホワイト
+    surface:   "#FFFFFF"   # カード・フォーム面
+
+  # テキスト
+  text:
+    on_dark:
+      headline: "#FFFFFF"
+      body:     "#A1A1A6"  # ダーク背景の補足テキスト（明度低めの白灰）
+    on_light:
+      headline: "#1D1D1F"  # ほぼ黒（純黒より柔らかい）
+      body:     "#6E6E73"  # ミディアムグレー
+
+  # アクセント
+  accent:
+    link_on_dark:  "#2997FF"  # ブルー（ダーク背景のCTA・リンク）
+    link_on_light: "#0066CC"  # ブルー（ライト背景のCTA・リンク）
+    destructive:   "#FF453A"  # 警告・削除（使用頻度低）
+
+  # 境界・区切り
+  border:
+    subtle:  "rgba(255,255,255,0.12)"  # ダーク背景上の線
+    default: "#D2D2D7"                 # ライト背景上の線
+
+
+# ── 2. タイポグラフィ ─────────────────────────────────────
+typography:
+  font_stack:
+    - "-apple-system"
+    - "BlinkMacSystemFont"
+    - "'Helvetica Neue'"
+    - "sans-serif"
+
+  # スケール（rem基準 / 16px = 1rem）
+  scale:
+    display:   { size: "4.5rem",  weight: 700, line_height: 1.05, tracking: "-0.02em" }  # 最大見出し
+    headline:  { size: "2.5rem",  weight: 600, line_height: 1.1,  tracking: "-0.01em" }
+    title:     { size: "1.75rem", weight: 600, line_height: 1.2,  tracking: "0" }
+    subhead:   { size: "1.2rem",  weight: 400, line_height: 1.4,  tracking: "0" }
+    body:      { size: "1.0625rem", weight: 400, line_height: 1.6, tracking: "0" }
+    caption:   { size: "0.8125rem", weight: 400, line_height: 1.4, tracking: "0" }
+
+  # ルール
+  rules:
+    - "見出しは大きく・大胆に。本文は控えめに"
+    - "文字間隔はマイナス値（詰め気味）でシャープな印象"
+    - "本文の行間は1.5〜1.6でゆったり読みやすく"
+    - "大文字化（all-caps）は使わない"
+
+
+# ── 3. スペーシング・レイアウト ──────────────────────────
+spacing:
+  base_unit: "8px"  # すべての余白はこの倍数
+
+  section:
+    vertical_padding: "clamp(60px, 8vw, 120px)"  # レスポンシブな上下余白
+    gap_between:      "clamp(40px, 5vw, 80px)"
+
+  container:
+    max_width: "1200px"
+    side_padding: "clamp(16px, 5vw, 48px)"
+
+  component:
+    card_gap:    "20px"
+    icon_margin: "16px"
+
+  # 哲学
+  philosophy:
+    - "余白は「何もない空間」でなく「呼吸する空間」"
+    - "コンテンツ密度は低め。一画面に詰め込まない"
+    - "フルスクリーンセクションを積極的に使う"
+
+
+# ── 4. コンポーネントスタイル ─────────────────────────────
+components:
+  button:
+    primary:
+      background: "accent.link_on_light or accent.link_on_dark"
+      text_color: "#FFFFFF"
+      border_radius: "980px"     # 完全な丸（ピル型）
+      padding: "12px 24px"
+      font_weight: 400
+      font_size: "1.0625rem"
+      hover_opacity: 0.8
+
+    secondary:
+      background: "transparent"
+      text_color: "accent color"
+      border: "none"
+      style: "テキストリンクに矢印アイコン付き（→ or ›）"
+
+  card:
+    background: "color.background.surface or .secondary"
+    border_radius: "18px"        # 大きめの角丸でやわらかく
+    border: "none"               # ボーダーなし
+    shadow: "none"               # シャドウなし（フラット）
+    overflow: "hidden"
+    padding: "32px"
+
+  image:
+    style: "フチなし・全幅・オブジェクトフィットcover"
+    ratio_hero: "16/9 or 全画面"
+    ratio_card: "1/1 or 4/3"
+    treatment: "色補正なし・製品は白背景またはグラデ背景で切り抜き"
+
+  nav:
+    height: "44px"
+    background: "rgba(0,0,0,0.8) with backdrop-filter: blur(20px)"
+    text_size: "0.75rem"
+    text_weight: 400
+    style: "グラスモーフィズム（磨りガラス）ナビゲーション"
+
+  divider:
+    style: "使わない or 極細（0.5px）の線のみ"
+
+
+# ── 5. モーション・インタラクション ─────────────────────
+motion:
+  easing: "cubic-bezier(0.25, 0.1, 0.25, 1.0)"  # Apple標準イージング
+  duration:
+    fast:   "200ms"  # ホバー・フォーカス
+    normal: "400ms"  # トランジション
+    slow:   "600ms"  # ページ内アニメーション
+
+  patterns:
+    - "スクロールで要素がフェードイン（opacity 0→1 + translateY 20px→0）"
+    - "ホバーでスケール微増（1.0 → 1.02）"
+    - "ページ遷移はクロスフェード"
+    - "過度なアニメーションは使わない"
+
+
+# ── 6. デザイン哲学（再利用時の指針） ────────────────────
+philosophy:
+  core_principles:
+    - label: "製品が主役"
+      desc: "UIはコンテンツを引き立てる脇役。装飾は最小限"
+
+    - label: "コントラストで語る"
+      desc: "黒と白の強いコントラストで情報の重要度を示す"
+
+    - label: "1セクション1メッセージ"
+      desc: "各セクションで伝えることは1つだけ。詰め込まない"
+
+    - label: "サイズで魅せる"
+      desc: "大きな文字・大きな画像が高級感を演出する"
+
+    - label: "色は使わない"
+      desc: "アクセントカラーは1色のみ。虹色は避ける"
+
+  anti_patterns:
+    - "グラデーション背景（単色か純黒・純白のみ）"
+    - "多色使い（3色以上のカラフル展開）"
+    - "ボックスシャドウの多用"
+    - "装飾的なアイコンやイラストの多用"
+    - "情報密度が高いレイアウト"
+    - "派手なアニメーション"
+
+
+# ── 7. セクションパターン ────────────────────────────────
+section_patterns:
+  hero:
+    bg: "black"
+    layout: "中央揃え テキスト + 製品画像（全幅）"
+    headline_size: "display"
+    cta_style: "primary + secondary（2択）"
+
+  feature_highlight:
+    bg: "secondary (#F5F5F7)"
+    layout: "左右2カラム or 中央テキスト + 下に画像"
+    content: "1機能に絞った詳細説明"
+
+  product_grid:
+    bg: "white"
+    layout: "2〜4カラムグリッド カード型"
+    card_style: "角丸 シャドウなし"
+
+  full_bleed_image:
+    bg: "画像が背景を占有"
+    layout: "画像上にテキストオーバーレイ"
+    text_color: "white"
+
+  cta_band:
+    bg: "black or accent"
+    layout: "中央揃え 短いコピー + ボタン"
