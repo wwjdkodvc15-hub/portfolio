@@ -364,6 +364,20 @@
     align-self: center;
   }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+  }
+
+  .section--flush {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   /* ── FOOTER ── */
   footer {
     border-top: 0.5px solid var(--border-default);
@@ -398,11 +412,11 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- NAV -->
-<nav>
-  <a href="#" class="logo">AI Design</a>
+<nav aria-label="メインナビゲーション">
+  <a href="#top" class="logo">AI Design</a>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#works">Works</a></li>
@@ -423,10 +437,10 @@
 </section>
 
 <!-- ABOUT -->
-<div class="about-bg section-full" id="about">
-  <div class="section" style="padding-top:0; padding-bottom:0;">
+<section class="about-bg section-full" id="about" aria-labelledby="about-heading">
+  <div class="section section--flush">
     <p class="section-label fade-in">About</p>
-    <h2 class="fade-in">AIと感性で、<br>新しい表現を。</h2>
+    <h2 class="fade-in" id="about-heading">AIと感性で、<br>新しい表現を。</h2>
     <p class="sub fade-in">生成AIを創造のパートナーとして活用し、<br>人の感性と組み合わせることで唯一の表現を生み出します。</p>
     <div class="about-grid">
       <div class="card fade-in">
@@ -446,31 +460,31 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- WORKS -->
-<div class="section-full" style="background: var(--bg-surface);">
-  <div class="section" style="padding-top:0; padding-bottom:0;" id="works">
+<section class="section-full" style="background: var(--bg-surface);" id="works" aria-labelledby="works-heading">
+  <div class="section section--flush">
     <p class="section-label fade-in">Works</p>
-    <h2 class="fade-in">実績</h2>
+    <h2 class="fade-in" id="works-heading">実績</h2>
     <p class="sub fade-in">AIを活用して生み出したデザイン成果物。</p>
     <div class="works-grid">
       <div class="work-card fade-in">
-        <img src="images/work1.png" alt="WAKOKAIトートバッグ キャラクターデザイン" loading="lazy">
+        <img src="images/work1.png" alt="WAKOKAIトートバッグ キャラクターデザイン" loading="lazy" width="800" height="600">
         <div class="info">
           <h3>トートバッグ — キャラクターデザイン</h3>
           <p>UNIQLO × WAKOKAI コラボ</p>
         </div>
       </div>
       <div class="work-card fade-in">
-        <img src="images/work2.png" alt="WAKOKAIトートバッグ ロゴデザイン" loading="lazy">
+        <img src="images/work2.png" alt="WAKOKAIトートバッグ ロゴデザイン" loading="lazy" width="800" height="600">
         <div class="info">
           <h3>トートバッグ — ロゴデザイン</h3>
           <p>UNIQLO × WAKOKAI コラボ</p>
         </div>
       </div>
       <div class="work-card fade-in">
-        <img src="images/work3.jpg" alt="コラボ告知ビジュアル" loading="lazy">
+        <img src="images/work3.jpg" alt="コラボ告知ビジュアル" loading="lazy" width="800" height="600">
         <div class="info">
           <h3>コラボ告知ビジュアル</h3>
           <p>UNIQLO UT MARKET 掲載</p>
@@ -478,13 +492,13 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- PROCESS -->
-<div class="process-bg section-full" id="process">
-  <div class="section" style="padding-top:0; padding-bottom:0;">
+<section class="process-bg section-full" id="process" aria-labelledby="process-heading">
+  <div class="section section--flush">
     <p class="section-label fade-in">Process</p>
-    <h2 class="fade-in">アイデアから<br>実現まで。</h2>
+    <h2 class="fade-in" id="process-heading">アイデアから<br>実現まで。</h2>
     <p class="sub fade-in">構想から企業採用に至るまでの制作フロー。</p>
     <div class="process-steps">
       <div class="step fade-in">
@@ -509,22 +523,25 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- CONTACT -->
-<div class="contact-band" id="contact">
+<section class="contact-band" id="contact" aria-labelledby="contact-heading">
   <div class="contact-inner">
     <span class="section-label fade-in">Contact</span>
-    <h2 class="fade-in">一緒に<br>つくりませんか。</h2>
+    <h2 class="fade-in" id="contact-heading">一緒に<br>つくりませんか。</h2>
     <p class="fade-in">お仕事のご依頼・ご相談はお気軽にどうぞ。</p>
     <form class="contact-form fade-in" action="https://formspree.io/f/mvzjzklj" method="POST">
-      <input type="text" name="name" placeholder="お名前" maxlength="100" required>
-      <input type="email" name="email" placeholder="メールアドレス" maxlength="254" required>
-      <textarea name="message" placeholder="メッセージ" rows="4" maxlength="2000" required></textarea>
+      <label for="contact-name" class="sr-only">お名前</label>
+      <input id="contact-name" type="text" name="name" placeholder="お名前" maxlength="100" required>
+      <label for="contact-email" class="sr-only">メールアドレス</label>
+      <input id="contact-email" type="email" name="email" placeholder="メールアドレス" maxlength="254" required>
+      <label for="contact-message" class="sr-only">メッセージ</label>
+      <textarea id="contact-message" name="message" placeholder="メッセージ" rows="4" maxlength="2000" required></textarea>
       <button type="submit" class="btn-primary">メッセージを送る</button>
     </form>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
